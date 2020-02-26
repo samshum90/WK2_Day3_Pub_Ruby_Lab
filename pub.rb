@@ -1,12 +1,13 @@
 require'pry-byebug'
 class Pub
 
-  attr_reader :name, :till, :drink_stock, :food_stock
-  def initialize(name, till)
+  attr_reader :name, :till, :drink_stock, :food_stock, :stock
+  def initialize(name, till, stock)
     @name = name
     @till = till
     @drink_stock = []
     @food_stock = []
+    @stock = stock
   end
 
   def add_drink(drink)

@@ -10,7 +10,7 @@ require_relative('../Food')
 class TestPub < Minitest::Test
 
   def setup
-    @pub1 = Pub.new("Forty Forty Two", 10020)
+    @pub1 = Pub.new("Forty Forty Two", 10020,{})
     @drink1 = Drinks.new({name: "Vodka", price:1000, alcohol_lvl: 1})
     @customer1 = Customer.new("Sam",1000000, 23)
     @food1 = Food.new("Burger", 500, 3)
@@ -121,5 +121,15 @@ class TestPub < Minitest::Test
     assert_equal(10020 + 500, @pub1.till)
     assert_equal(-3, @customer1.drunkeness)
     assert_equal(0, @pub1.food_stock.size)
+  end
+
+  def test_number_drinks_in_stock()
+    @pub1.add_drink(@drink1)
+    @pub1.add_drink(@drink1)
+    @pub1.add_drink(@drink1)
+    assert_equal(3, @pub1.stock.size)
+
+
+
   end
 end
