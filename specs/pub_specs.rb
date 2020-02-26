@@ -10,8 +10,8 @@ class TestPub < Minitest::Test
 
   def setup
     @pub1 = Pub.new("Forty Forty Two", 10020)
-    @drink1 = Drinks.new({name: "Vodka", price:1000})
-    @customer1 = Customer.new("Sam",1000000)
+    @drink1 = Drinks.new({name: "Vodka", price:1000, alcohol_lvl: 1})
+    @customer1 = Customer.new("Sam",1000000, 23)
   end
 
   def test_pub
@@ -47,12 +47,49 @@ class TestPub < Minitest::Test
 
   def test_customer_buys_drink
     @pub1.add_drink(@drink1)
-    @pub1.customer_buys_drink(@pub1)
+    @pub1.customer_buys_drink(@pub1, @customer1)
 
     assert_equal(999000, @customer1.wallet)
     assert_equal(11020, @pub1.till)
+    assert_equal(1, @customer1.drunkeness)
     assert_equal(0, @pub1.drink_stock.size)
   end
 
+  def test_customer_of_age
+    @pub1.customer_of_age(@customer1)
+    assert(true)
+  end
+
+  def test_customer_too_drunk
+    @pub1.add_drink(@drink1)
+    @pub1.customer_buys_drink(@pub1, @customer1)
+    @pub1.add_drink(@drink1)
+    @pub1.customer_buys_drink(@pub1, @customer1)
+    @pub1.add_drink(@drink1)
+    @pub1.customer_buys_drink(@pub1, @customer1)
+    @pub1.add_drink(@drink1)
+    @pub1.customer_buys_drink(@pub1, @customer1)
+    @pub1.add_drink(@drink1)
+    @pub1.customer_buys_drink(@pub1, @customer1)
+    @pub1.add_drink(@drink1)
+    @pub1.customer_buys_drink(@pub1, @customer1)
+    @pub1.add_drink(@drink1)
+    @pub1.customer_buys_drink(@pub1, @customer1)
+    @pub1.add_drink(@drink1)
+    @pub1.customer_buys_drink(@pub1, @customer1)
+    @pub1.add_drink(@drink1)
+    @pub1.customer_buys_drink(@pub1, @customer1)
+    @pub1.add_drink(@drink1)
+    @pub1.customer_buys_drink(@pub1, @customer1)
+    @pub1.add_drink(@drink1)
+    @pub1.customer_buys_drink(@pub1, @customer1)
+    @pub1.add_drink(@drink1)
+    @pub1.customer_buys_drink(@pub1, @customer1)
+    @pub1.add_drink(@drink1)
+    @pub1.customer_buys_drink(@pub1, @customer1)
+    @pub1.add_drink(@drink1)
+    @pub1.customer_buys_drink(@pub1, @customer1)
+    assert_equal(false, @pub1.drunkeness_of_customer(@customer1))
+  end
 
 end

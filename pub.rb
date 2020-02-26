@@ -13,6 +13,7 @@ class Pub
   end
 
   def remove_drink(drink)
+    # binding.pry
     @drink_stock.delete(drink)
   end
 
@@ -28,14 +29,23 @@ class Pub
     end
   end
 
-  def customer_buys_drink(pub)
-    drink = pub.find_drink_by_name(pub)
-    binding.pry
-    decrease_wallet(drink.price)
+  def customer_buys_drink(pub, customer)
+    if (customer_of_age(customer) == true) && (drunkeness_of_customer(customer) == true)
 
-    pub.increase_till(pub.drink_stock[drink].price)
-    pub.remove_drink(drink)
+      drink = pub.find_drink_by_name(pub)
+      customer.decrease_wallet(drink[0].price)
+      pub.increase_till(drink[0].price)
+      customer.increase_drunkeness(drink[0].alcohol_lvl)
+      pub.remove_drink(drink[0])
+    end
+  end
 
+  def customer_of_age(customer)
+    return customer.age >= 18
+  end
+
+  def drunkeness_of_customer(customer)
+    return customer.drunkeness <= 10
   end
 
 
