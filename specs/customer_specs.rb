@@ -17,6 +17,10 @@ class TestCustomer < Minitest::Test
     assert_equal(1000000, @customer1.wallet)
   end
 
+  def test_decrease_wallet()
+    @customer1.decrease_wallet(10)
+    assert_equal(999990, @customer1.wallet)
+  end
 
 
 end
