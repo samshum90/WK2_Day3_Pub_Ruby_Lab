@@ -1,11 +1,12 @@
 require'pry-byebug'
 class Pub
 
-  attr_reader :name, :till, :drink_stock
+  attr_reader :name, :till, :drink_stock, :food_stock
   def initialize(name, till)
     @name = name
     @till = till
     @drink_stock = []
+    @food_stock = []
   end
 
   def add_drink(drink)
@@ -48,5 +49,29 @@ class Pub
     return customer.drunkeness <= 10
   end
 
+  def add_food(food)
+    @food_stock << food
+  end
 
+  def remove_food(food)
+    # binding.pry
+    @food_stock.delete(food)
+  end
+
+  def find_food_by_name(pub)
+    for food in pub.food_stock
+      if food.name == food_stock
+        return food
+      end
+    end
+  end
+
+
+  def customer_buys_food(pub, customer)
+      food = pub.find_food_by_name(pub)
+      customer.decrease_wallet(food[0].price)
+      pub.increase_till(food[0].price)
+      customer.decrease_drunkeness(food[0].rejuvenation_lvl)
+      pub.remove_food(food[0])
+    end
 end

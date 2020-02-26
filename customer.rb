@@ -16,6 +16,9 @@ class Customer
     @drunkeness += amount
   end
 
+  def decrease_drunkeness(amount)
+    @drunkeness -= amount
+  end
 
 
 end

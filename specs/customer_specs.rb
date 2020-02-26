@@ -5,6 +5,7 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 require_relative('../pub')
 require_relative('../customer')
 require_relative('../drinks')
+require_relative('../food')
 
 class TestCustomer < Minitest::Test
 
@@ -24,5 +25,10 @@ class TestCustomer < Minitest::Test
     assert_equal(999990, @customer1.wallet)
   end
 
+  def test_decrease_drunkeness()
+    @customer1.increase_drunkeness(10)
+    @customer1.decrease_drunkeness(10)
+    assert_equal(0, @customer1.drunkeness)
+  end
 
 end
